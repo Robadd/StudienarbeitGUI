@@ -51,7 +51,8 @@ namespace Studienarbeit
 
         private void BewEig_Click(object sender, RoutedEventArgs e)
         {
-            /* !! Überarbeiten ShowPropsDialog Methode aufrufen
+
+            // !! Überarbeiten ShowPropsDialog Methode aufrufen
             if (BewArten.SelectedIndex == 0) // =Querfeldein
             {
                 QuerEigWindow querEigWindow = new QuerEigWindow();
@@ -62,7 +63,7 @@ namespace Studienarbeit
                 RechtEigWindow rechtEigWindow = new RechtEigWindow();
                 rechtEigWindow.Show();
             }
-             * */
+            
             if (BewArten.SelectedIndex == 0) //=Image
             {
                 if (Maler.SelectedItem != null)

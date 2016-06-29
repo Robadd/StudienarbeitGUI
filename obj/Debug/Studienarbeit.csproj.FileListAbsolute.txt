@@ -75,3 +75,32 @@ C:\Users\Robadd\Dropbox\studium\Studienarbeit\Studienarbeit\obj\Debug\Canvas.g.c
 C:\Users\Robadd\Dropbox\studium\Studienarbeit\Studienarbeit\obj\Debug\Painter.g.cs
 C:\Users\Robadd\Dropbox\studium\Studienarbeit\Studienarbeit\obj\Debug\ScrollProp.g.cs
 C:\Users\Robadd\Dropbox\studium\Studienarbeit\Studienarbeit\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\bin\Debug\Studienarbeit.exe.config
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Studienarbeit.exe
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Studienarbeit.pdb
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\bin\Debug\Studienarbeit.exe
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\bin\Debug\Studienarbeit.pdb
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Studienarbeit.csprojResolveAssemblyReference.cache
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Canvas.baml
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Painter.baml
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\ScrollProp.baml
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Canvas.g.cs
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Eigenschaftsfenster\ImageEigWindow.g.cs
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\MainWindow.g.cs
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Eigenschaftsfenster\QuerEigWindow.g.cs
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Eigenschaftsfenster\RechtEigWindow.g.cs
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Eigenschaftsfenster\SprayerEigWindow.g.cs
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Painter.g.cs
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\ScrollProp.g.cs
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\App.g.cs
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Studienarbeit_MarkupCompile.cache
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Studienarbeit_MarkupCompile.lref
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Eigenschaftsfenster\ImageEigWindow.baml
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\MainWindow.baml
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Eigenschaftsfenster\QuerEigWindow.baml
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Eigenschaftsfenster\RechtEigWindow.baml
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Eigenschaftsfenster\SprayerEigWindow.baml
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Studienarbeit.g.resources
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Studienarbeit.Properties.Resources.resources
+C:\Users\Robadd\Desktop\Neuer Ordner\Studienarbeit\Studienarbeit\obj\Debug\Studienarbeit.csproj.GenerateResource.Cache

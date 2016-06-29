@@ -18,6 +18,9 @@ namespace Studienarbeit
 {
     /// <summary>
     /// Interaktionslogik für ScrollProp.xaml
+    /// 
+    /// Eigenschaften für ScrollProp:
+    /// ActualValue, MaxVal, MinVal. Alle selbsterklärend
     /// </summary>
     public partial class ScrollProp : UserControl
     {
@@ -44,12 +47,17 @@ namespace Studienarbeit
             } 
             set 
             {
-                if (value > MaxVal) 
-                    actualValue = MaxVal;
-                else if (value < MinVal) 
-                    actualValue = MinVal;
-                else 
-                    actualValue = value;
+                if (actualValue != value)
+                {
+                    int newVal;
+                    if (value > MaxVal)         newVal = MaxVal;
+                    else if (value < MinVal)    newVal = MinVal;
+                    else                        newVal = value;
+
+                    actualValue = newVal;
+                    TextVal.Text = newVal.ToString();
+                    Scroll.Value = (double)newVal;
+                }
             } 
         }
 
@@ -57,14 +65,20 @@ namespace Studienarbeit
         public ScrollProp()
         {
             InitializeComponent();
+            this.Loaded += Window_Loaded;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Scroll.Minimum = MinVal;
+            Scroll.Maximum = MaxVal;
         }
 
         private void ScrollBar_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (Scroll.Value != ActualValue)
             {
-                ActualValue = (int)Scroll.Value;
-                TextVal.Text = ActualValue.ToString();
+                TextVal.Text = ((int)Math.Round(Scroll.Value)).ToString();
             }
         }
 
@@ -73,9 +87,10 @@ namespace Studienarbeit
             if (TextVal.Text != ActualValue.ToString())
             {
                 int newVal;
-                int.TryParse(TextVal.Text, out newVal);
-                Scroll.Value = newVal;
-                actualValue = newVal;
+                if (int.TryParse(TextVal.Text, out newVal))
+                {
+                    ActualValue = newVal;
+                }
             }
         }
     }
