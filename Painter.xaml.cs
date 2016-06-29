@@ -44,8 +44,10 @@ namespace Studienarbeit
             WalkType = walk;
             PaintType = paint;
             VisualBrush WalkBrush = new VisualBrush(WalkType.GetFace(new Size(20, 20)));
+            VisualBrush DrawBrush = new VisualBrush(PaintType.GetFace(new Size(20, 20)));
 
             walker.Fill = WalkBrush;
+            drawer.Fill = DrawBrush;
 
             //AddVisualChild(PaintType.GetFace(new Size(20,20)));
             //AddVisualChild(WalkType.GetFace(new Size(20,20)));

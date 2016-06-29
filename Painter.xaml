@@ -7,9 +7,10 @@
              mc:Ignorable="d" 
              Width="20" Height="20"
              d:DesignHeight="300" d:DesignWidth="300">
-    
 
-        <Rectangle x:Name="walker" ></Rectangle>
+    <Grid>
+        <Rectangle x:Name="drawer"></Rectangle>
+        <Rectangle x:Name="walker"></Rectangle>
         
-    
+</Grid>
 </UserControl>

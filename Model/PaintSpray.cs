@@ -48,7 +48,8 @@ namespace Studienarbeit
             // Code einfügen
             DrawingVisual dv = new DrawingVisual();
             DrawingContext dc = dv.RenderOpen();
-
+            dc.DrawRectangle(Brushes.Green,null,new Rect(size));
+            
             // HIER MALEN !!!! auf dc
 
             dc.Close();

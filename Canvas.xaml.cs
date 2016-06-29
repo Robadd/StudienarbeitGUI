@@ -85,6 +85,8 @@ namespace Studienarbeit
                     dc.PushTransform(new TranslateTransform(Math.Floor(newPos.X), Math.Floor(newPos.Y)));
                     p.PaintOn(dc, PainterSize);
                     dc.Pop();
+                    // Painter-Faces draufzeichnen
+                    p.Margin = new Thickness(Math.Floor(newPos.X), Math.Floor(newPos.Y), 0, 0);                    
                 }
                 
             }
@@ -95,7 +97,8 @@ namespace Studienarbeit
 
             drawingContext.DrawImage(ActualImage.Source, new Rect(0, 0, width, height));
 
-            // Painter-Faces draufzeichnen
+            
+            
             //drawingContext.Close();
             // fertig
             
@@ -104,7 +107,8 @@ namespace Studienarbeit
         public void AddPainter(Painter p)
         {
             PainterList.Add(p);
-            
+            p.HorizontalAlignment = HorizontalAlignment.Left;
+            p.VerticalAlignment = VerticalAlignment.Top;
             this.Children.Add(p);
 
            // Dispatcher.Invoke(() => InvalidateVisual());
