@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,7 +22,10 @@ namespace Studienarbeit
     /// </summary>
     public partial class Canvas : Grid
     {
+        Timer timer = new Timer(50);
         public ArrayList PainterList;
+        public Size PainterSize = new Size(20,20);
+        int ttl=0;
 
         public Image ActualImage
         {
@@ -32,26 +36,88 @@ namespace Studienarbeit
         {
             InitializeComponent();
             PainterList = new ArrayList();
+            timer.Elapsed += timer_Elapsed;
+            ActualImage = new Image();
+            timer.Start();   
+        }
+
+        void timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Dispatcher.Invoke(() => InvalidateVisual());
+        }
+
+        void clean() 
+        {
+            ttl = 0;
+            System.GC.Collect();
         }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            foreach (Painter p in PainterList) 
+            ttl++;
+            if (ttl > 100) clean();
+            double width = Math.Floor(this.ActualWidth);
+            double height =Math.Floor(this.ActualHeight);
+
+            // dv ist neues Bild, ums als actualImage abspeichern zu können
+            DrawingVisual dv = new DrawingVisual();
+            using (DrawingContext dc = dv.RenderOpen())
             {
-                // Zeichnen
-                
-                
+            // image holen und Als Hintergrund für dc setzen
+            dc.DrawImage(ActualImage.Source,new Rect(0,0,width,height));
+
+            // Alle Painter drauf malen lassen
+                foreach (Painter p in PainterList)
+                {
+                    // Punkt neu Positionieren
+                    Point newPos;
+
+                    // weitergehen
+                    newPos = p.AdvancePosition();
+
+                    //Am Rand reflektieren
+                    if (newPos.Y <= 0)              p.Reflect(ReflectionType.Top);
+                    else if (newPos.Y >= height)    p.Reflect(ReflectionType.Bottom);
+                    else if (newPos.X <= 0)         p.Reflect(ReflectionType.Left);
+                    else if (newPos.X >= width)     p.Reflect(ReflectionType.Right);
+
+                    // Punkt zeichnen
+                    dc.PushTransform(new TranslateTransform(Math.Floor(newPos.X), Math.Floor(newPos.Y)));
+                    p.PaintOn(dc, PainterSize);
+                    dc.Pop();
+                }
                 
             }
+            // DrawingContext als actualImage abspeichern
+            RenderTargetBitmap bmp = new RenderTargetBitmap((int)width, (int)height, 96, 96, PixelFormats.Pbgra32);
+            bmp.Render(dv);
+            ActualImage.Source = bmp;
+
+            drawingContext.DrawImage(ActualImage.Source, new Rect(0, 0, width, height));
+
+            // Painter-Faces draufzeichnen
+            //drawingContext.Close();
+            // fertig
+            
         }
 
         public void AddPainter(Painter p)
         {
             PainterList.Add(p);
             
-            this.ActualDrawingCanvas.Children.Add(p);
+            this.Children.Add(p);
 
            // Dispatcher.Invoke(() => InvalidateVisual());
         }
+
+       
+
+        private void ActualDrawingCanvas_SizeChanged_1(object sender, SizeChangedEventArgs e)
+        {
+            ActualImage = new Image();
+            Dispatcher.Invoke(() => InvalidateVisual());
+        }
+
+        
     }
 }

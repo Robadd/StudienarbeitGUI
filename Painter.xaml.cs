@@ -20,6 +20,7 @@ namespace Studienarbeit
     /// </summary>
     public partial class Painter : UserControl
     {
+
         private Point position;
         // bool Active;
         private IPaint paintType;
@@ -48,6 +49,13 @@ namespace Studienarbeit
 
             //AddVisualChild(PaintType.GetFace(new Size(20,20)));
             //AddVisualChild(WalkType.GetFace(new Size(20,20)));
+            this.Loaded += Window_Loaded;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //this.Height = MinVal;
+            //this.Width = MaxVal;
         }
 
         public Point AdvancePosition()
@@ -62,6 +70,15 @@ namespace Studienarbeit
             position = pos;
         }
 
+        public void PaintOn(DrawingContext dc, Size dcSize)
+        {
+            PaintType.PaintOn(dc, dcSize);
+        }
+
+        public void Reflect(ReflectionType reflType)
+        {
+            WalkType.Reflect(reflType);
+        }
         
     }
 }

@@ -20,7 +20,7 @@ namespace Studienarbeit
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        
 
         public MainWindow()
         {
@@ -114,7 +114,9 @@ namespace Studienarbeit
             if (BewArten.SelectedIndex == 0) walk = new WalkDirectional(2,2);
             else if (BewArten.SelectedIndex == 1) walk = new WalkRectangular(5,5,5,5,5,DirType.Right);
 
-            if((paint != null) && (walk != null)) DrawingCanvas.AddPainter(new Painter(paint,walk));
+            Painter newPainter = new Painter(paint, walk);
+            newPainter.setStartPos(new Point(0, 0));
+            if((paint != null) && (walk != null)) DrawingCanvas.AddPainter(newPainter);
 
             //Maler
         }
