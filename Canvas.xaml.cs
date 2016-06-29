@@ -24,8 +24,9 @@ namespace Studienarbeit
     {
         Timer timer = new Timer(50);
         public ArrayList PainterList;
-        public Size PainterSize = new Size(20,20);
+        public Size PainterSize = new Size(100,100);
         int ttl=0;
+        private bool sizeChangeInvalidate = false;
 
         public Image ActualImage
         {
@@ -43,6 +44,7 @@ namespace Studienarbeit
 
         void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            sizeChangeInvalidate = false;
             Dispatcher.Invoke(() => InvalidateVisual());
         }
 
@@ -54,59 +56,84 @@ namespace Studienarbeit
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            ttl++;
-            if (ttl > 100) clean();
-            double width = Math.Floor(this.ActualWidth);
-            double height =Math.Floor(this.ActualHeight);
-
-            // dv ist neues Bild, ums als actualImage abspeichern zu können
-            DrawingVisual dv = new DrawingVisual();
-            using (DrawingContext dc = dv.RenderOpen())
+            if (!sizeChangeInvalidate)
             {
-            // image holen und Als Hintergrund für dc setzen
-            dc.DrawImage(ActualImage.Source,new Rect(0,0,width,height));
+                ttl++;
+                if (ttl > 100) clean();
+                double width = Math.Floor(this.ActualWidth);
+                double height = Math.Floor(this.ActualHeight);
 
-            // Alle Painter drauf malen lassen
-                foreach (Painter p in PainterList)
+                // dv ist neues Bild, ums als actualImage abspeichern zu können
+                DrawingVisual dv = new DrawingVisual();
+                using (DrawingContext dc = dv.RenderOpen())
                 {
-                    // Punkt neu Positionieren
-                    Point newPos;
+                    // image holen und Als Hintergrund für dc setzen
+                    dc.DrawImage(ActualImage.Source, new Rect(0, 0, width, height));
 
-                    // weitergehen
-                    newPos = p.AdvancePosition();
+                    // Alle Painter drauf malen lassen
+                    foreach (Painter p in PainterList)
+                    {
+                        // Punkt neu Positionieren
+                        Point newPos;
 
-                    //Am Rand reflektieren
-                    if (newPos.Y <= 0)              p.Reflect(ReflectionType.Top);
-                    else if (newPos.Y >= height)    p.Reflect(ReflectionType.Bottom);
-                    else if (newPos.X <= 0)         p.Reflect(ReflectionType.Left);
-                    else if (newPos.X >= width)     p.Reflect(ReflectionType.Right);
+                        // weitergehen
+                        newPos = p.AdvancePosition();
 
-                    // Punkt zeichnen
-                    dc.PushTransform(new TranslateTransform(Math.Floor(newPos.X), Math.Floor(newPos.Y)));
-                    p.PaintOn(dc, PainterSize);
-                    dc.Pop();
-                    // Painter-Faces draufzeichnen
-                    p.Margin = new Thickness(Math.Floor(newPos.X), Math.Floor(newPos.Y), 0, 0);                    
+                        //Am Rand reflektieren
+                        if (newPos.Y < 0)
+                        { 
+                            p.Reflect(ReflectionType.Top);
+                            newPos.Y = 0;
+                        }
+                        else if (newPos.Y > height)
+                        { 
+                            p.Reflect(ReflectionType.Bottom);
+                            newPos.Y = height;
+                        }
+                        else if (newPos.X < 0)
+                        { 
+                            p.Reflect(ReflectionType.Left);
+                            newPos.X = 0;
+                        }
+                        else if (newPos.X > width)
+                        { 
+                            p.Reflect(ReflectionType.Right);
+                            newPos.X = width;
+                        }
+
+                        // Punkt zeichnen
+                        dc.PushTransform(new TranslateTransform(Math.Floor(newPos.X), Math.Floor(newPos.Y)));
+                        p.PaintOn(dc);
+                        dc.Pop();
+                        // Painter-Faces draufzeichnen
+                        p.Margin = new Thickness(Math.Floor(newPos.X), Math.Floor(newPos.Y), 0, 0);
+                    }
+
                 }
-                
+                // DrawingContext als actualImage abspeichern
+                RenderTargetBitmap bmp = new RenderTargetBitmap((int)width, (int)height, 96, 96, PixelFormats.Pbgra32);
+                bmp.Render(dv);
+                ActualImage.Source = bmp;
+
+                drawingContext.DrawImage(ActualImage.Source, new Rect(0, 0, width, height));
+
+
+
+                //drawingContext.Close();
+                // fertig
+                sizeChangeInvalidate = true;
             }
-            // DrawingContext als actualImage abspeichern
-            RenderTargetBitmap bmp = new RenderTargetBitmap((int)width, (int)height, 96, 96, PixelFormats.Pbgra32);
-            bmp.Render(dv);
-            ActualImage.Source = bmp;
-
-            drawingContext.DrawImage(ActualImage.Source, new Rect(0, 0, width, height));
-
-            
-            
-            //drawingContext.Close();
-            // fertig
+            else
+            {
+                ActualImage = new Image();
+            }
             
         }
 
         public void AddPainter(Painter p)
         {
             PainterList.Add(p);
+            p.size = PainterSize;
             p.HorizontalAlignment = HorizontalAlignment.Left;
             p.VerticalAlignment = VerticalAlignment.Top;
             this.Children.Add(p);
@@ -118,8 +145,12 @@ namespace Studienarbeit
 
         private void ActualDrawingCanvas_SizeChanged_1(object sender, SizeChangedEventArgs e)
         {
-            ActualImage = new Image();
+            //System.GC.Collect();
+            sizeChangeInvalidate = true;
+            //timer.Stop();
+            //ActualImage = new Image();
             Dispatcher.Invoke(() => InvalidateVisual());
+            
         }
 
         

@@ -48,9 +48,21 @@ namespace Studienarbeit
             // Code einfügen
             DrawingVisual dv = new DrawingVisual();
             DrawingContext dc = dv.RenderOpen();
-            dc.DrawRectangle(Brushes.Green,null,new Rect(size));
+            dc.PushTransform(new ScaleTransform(size.Width,size.Height));
+            // HIER MALEN !!!! auf dc 0-1, 0-1
+            Pen pen = new Pen(Brushes.Green,0.5);
+            StreamGeometry streamGeometry = new StreamGeometry();
+            using (StreamGeometryContext geometryContext = streamGeometry.Open())
+            {
+                geometryContext.BeginFigure(new Point(0,0), true, true);
+                PointCollection points = new PointCollection {new Point(0.7,1), new Point(1,0.7) };
+                geometryContext.PolyLineTo(points, true, true);
+            }
+            //streamGeometry.Freeze();
+            dc.DrawGeometry(Brushes.Red, new Pen(Brushes.Black, 0.05), streamGeometry);
+            dc.Pop();
             
-            // HIER MALEN !!!! auf dc
+            
 
             dc.Close();
             return dv;

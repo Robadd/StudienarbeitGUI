@@ -110,9 +110,9 @@ namespace Studienarbeit
             // Momentan noch statische Werte
             // Evtl. die Maleigenschaften, die hier gebraucht werden als Variablen von dieser WindowKlasse setzen
             if (Malarten.SelectedIndex == 0) paint = new PaintImage(new Image());
-            else if (Malarten.SelectedIndex == 1) paint = new PaintSpray(Colors.Black, new Size(20, 20));
-            if (BewArten.SelectedIndex == 0) walk = new WalkDirectional(2,2);
-            else if (BewArten.SelectedIndex == 1) walk = new WalkRectangular(5,5,5,5,5,DirType.Right);
+            else if (Malarten.SelectedIndex == 1) paint = new PaintSpray(Colors.Black, new Size(2, 2));
+            if (BewArten.SelectedIndex == 0) walk = new WalkDirectional(2, 2);
+            else if (BewArten.SelectedIndex == 1) walk = new WalkRectangular(10, 7, 20, 8, 2, DirType.Right);
 
             Painter newPainter = new Painter(paint, walk);
             newPainter.setStartPos(new Point(0, 0));
