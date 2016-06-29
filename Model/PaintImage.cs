@@ -26,7 +26,7 @@ namespace Studienarbeit
 
         public void PaintOn(DrawingContext dc, Size dcSize)
         {
-            // TODO!!! 
+            // TODO!!!
             //dc.DrawImage((ImageSource)image, new Rect(dcSize));
 
         }
@@ -39,7 +39,7 @@ namespace Studienarbeit
 
         public Visual GetFace(Size size)
         {
-            // Code einfügen
+            // Code einfügen   
             DrawingVisual dv = new DrawingVisual();       
             DrawingContext dc = dv.RenderOpen();
 
