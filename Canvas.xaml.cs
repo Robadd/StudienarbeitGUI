@@ -22,23 +22,27 @@ namespace Studienarbeit
     /// </summary>
     public partial class Canvas : Grid
     {
-        Timer timer = new Timer(50);
+        public Timer timer = new Timer(50);
         public ArrayList PainterList;
         public Size PainterSize = new Size(100,100);
-        int ttl=0;
+        private int ttl=0;
         private bool sizeChangeInvalidate = false;
 
+        private Image actualImage;
         public Image ActualImage
         {
-            get; private set;
+            get { return actualImage; } 
+            private set { actualImage = value; }
         }
 
         public Canvas()
         {
             InitializeComponent();
+
             PainterList = new ArrayList();
-            timer.Elapsed += timer_Elapsed;
             ActualImage = new Image();
+
+            timer.Elapsed += timer_Elapsed;
             timer.Start();   
         }
 
@@ -105,29 +109,24 @@ namespace Studienarbeit
                         dc.PushTransform(new TranslateTransform(Math.Floor(newPos.X), Math.Floor(newPos.Y)));
                         p.PaintOn(dc);
                         dc.Pop();
+
                         // Painter-Faces draufzeichnen
                         p.Margin = new Thickness(Math.Floor(newPos.X), Math.Floor(newPos.Y), 0, 0);
                     }
-
                 }
+
                 // DrawingContext als actualImage abspeichern
                 RenderTargetBitmap bmp = new RenderTargetBitmap((int)width, (int)height, 96, 96, PixelFormats.Pbgra32);
                 bmp.Render(dv);
                 ActualImage.Source = bmp;
-
                 drawingContext.DrawImage(ActualImage.Source, new Rect(0, 0, width, height));
 
-
-
-                //drawingContext.Close();
-                // fertig
                 sizeChangeInvalidate = true;
             }
             else
             {
                 ActualImage = new Image();
             }
-            
         }
 
         public void AddPainter(Painter p)
@@ -137,22 +136,12 @@ namespace Studienarbeit
             p.HorizontalAlignment = HorizontalAlignment.Left;
             p.VerticalAlignment = VerticalAlignment.Top;
             this.Children.Add(p);
-
-           // Dispatcher.Invoke(() => InvalidateVisual());
         }
-
-       
 
         private void ActualDrawingCanvas_SizeChanged_1(object sender, SizeChangedEventArgs e)
         {
-            //System.GC.Collect();
             sizeChangeInvalidate = true;
-            //timer.Stop();
-            //ActualImage = new Image();
             Dispatcher.Invoke(() => InvalidateVisual());
-            
-        }
-
-        
+        } 
     }
 }

@@ -48,17 +48,12 @@ namespace Studienarbeit
 
         public Visual GetFace(Size size)
         {
-            // Code einfügen
             DrawingVisual dv = new DrawingVisual();
             DrawingContext dc = dv.RenderOpen();
 
-            //dc.PushTransform(new ScaleTransform(size.Width, size.Height));
-            // HIER MALEN !!!! auf dc
             dc.DrawLine(new Pen(Brushes.CornflowerBlue,2),new Point(0,size.Height),new Point(0.1 * size.Width,0.9*size.Height));
-
-
-            //dc.Pop();
             dc.Close();
+
             return dv;
         }
 

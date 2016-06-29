@@ -20,13 +20,10 @@ namespace Studienarbeit
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-
         public MainWindow()
         {
             InitializeComponent();
         }
-
 
         private void MalEig_Click(object sender, RoutedEventArgs e)
         {
@@ -51,7 +48,6 @@ namespace Studienarbeit
 
         private void BewEig_Click(object sender, RoutedEventArgs e)
         {
-
             // !! Überarbeiten ShowPropsDialog Methode aufrufen
             if (BewArten.SelectedIndex == 0) // =Querfeldein
             {
@@ -97,9 +93,7 @@ namespace Studienarbeit
             BewArten.Items.Add("Rechteck");
 
             BewArten.SelectedIndex = 0;
-            //ENDE Bewegungsarten Initialisierung
-
-            
+            //ENDE Bewegungsarten Initialisierung 
         }
 
         private void NeuerMaler_Click(object sender, RoutedEventArgs e)
@@ -111,8 +105,8 @@ namespace Studienarbeit
             // Evtl. die Maleigenschaften, die hier gebraucht werden als Variablen von dieser WindowKlasse setzen
             if (Malarten.SelectedIndex == 0) paint = new PaintImage(new Image());
             else if (Malarten.SelectedIndex == 1) paint = new PaintSpray(Colors.Black, new Size(2, 2));
-            if (BewArten.SelectedIndex == 0) walk = new WalkDirectional(2, 2);
-            else if (BewArten.SelectedIndex == 1) walk = new WalkRectangular(10, 7, 20, 8, 2, DirType.Right);
+            if (BewArten.SelectedIndex == 0) walk = new WalkDirectional(7, 3);
+            else if (BewArten.SelectedIndex == 1) walk = new WalkRectangular(10, 7, 20, 8, 2, DirType.Up);
 
             Painter newPainter = new Painter(paint, walk);
             newPainter.setStartPos(new Point(0, 0));

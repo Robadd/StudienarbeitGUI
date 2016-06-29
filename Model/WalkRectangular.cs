@@ -68,9 +68,10 @@ namespace Studienarbeit
         {
             pos += DPos;
 
+            // Test auf Richtungsumkehrungsbedingung
             if (Dir == DirType.Right) 
             {
-                if (pos >= PosLimRight) 
+                if (pos > PosLimRight) 
                 { 
                     Dir = DirType.Down;
                     pos = 0;
@@ -79,7 +80,7 @@ namespace Studienarbeit
             }
             else if (Dir == DirType.Down) 
             {
-                if (pos >= PosLimDown) 
+                if (pos > PosLimDown) 
                 {
                     Dir = DirType.Left;
                     pos = 0;
@@ -88,23 +89,22 @@ namespace Studienarbeit
             }
             else if (Dir == DirType.Left) 
             {
-                if (pos >= PosLimLeft) 
+                if (pos > PosLimLeft) 
                 {
                     Dir = DirType.Up;
                     pos = 0;
                 }
                 return new Point(-DPos, 0);
             }
-            else if(Dir == DirType.Up) 
+            else 
             {
-                if (pos >= PosLimUp) 
+                if (pos > PosLimUp) 
                 {
                     Dir = DirType.Right;
                     pos = 0;
                 }
                 return new Point(0, -DPos);
             }
-            return new Point (0,0);
         }
 
         public void Reflect(ReflectionType reflType)
@@ -138,17 +138,12 @@ namespace Studienarbeit
 
         public Visual GetFace(Size size)
         {
-            // Code einfügen
             DrawingVisual dv = new DrawingVisual();
             DrawingContext dc = dv.RenderOpen();
 
-            dc.PushTransform(new ScaleTransform(size.Width, size.Height));
-            // HIER MALEN !!!! auf dc
-           
-            dc.DrawRectangle(null, new Pen(Brushes.CornflowerBlue, 0.1), new Rect(0, 0.9, 0.1, 0.1));
-
-            dc.Pop();
+            dc.DrawLine(new Pen(Brushes.CornflowerBlue, 2), new Point(0, size.Height), new Point(0.1 * size.Width, 0.9 * size.Height));
             dc.Close();
+
             return dv;
         }
 

@@ -33,7 +33,7 @@ namespace Studienarbeit
         
         public void PaintOn(DrawingContext dc, Size dcSize)
         {
-            // Code einfügen
+            
             dc.DrawEllipse(Brushes.Black, null, new Point(0, 0), dcSize.Width / 2, dcSize.Height / 2);
             
         }
@@ -42,29 +42,27 @@ namespace Studienarbeit
             return new PaintSpray(SprayColor, SpraySize);
         }
 
-        
         public Visual GetFace(Size size)
         {
-            // Code einfügen
             DrawingVisual dv = new DrawingVisual();
-            DrawingContext dc = dv.RenderOpen();
-            dc.PushTransform(new ScaleTransform(size.Width,size.Height));
-            // HIER MALEN !!!! auf dc 0-1, 0-1
-            Pen pen = new Pen(Brushes.Green,0.5);
-            StreamGeometry streamGeometry = new StreamGeometry();
-            using (StreamGeometryContext geometryContext = streamGeometry.Open())
+            using (DrawingContext dc = dv.RenderOpen())
             {
-                geometryContext.BeginFigure(new Point(0,0), true, true);
-                PointCollection points = new PointCollection {new Point(0.7,1), new Point(1,0.7) };
-                geometryContext.PolyLineTo(points, true, true);
+                dc.PushTransform(new ScaleTransform(size.Width, size.Height));
+                /*
+                Pen pen = new Pen(Brushes.Green, 0.5);
+                StreamGeometry streamGeometry = new StreamGeometry();
+                using (StreamGeometryContext geometryContext = streamGeometry.Open())
+                {
+                    geometryContext.BeginFigure(new Point(0, 0), true, true);
+                    PointCollection points = new PointCollection { new Point(0.7, 1), new Point(1, 0.7) };
+                    geometryContext.PolyLineTo(points, true, true);
+                }
+                dc.DrawGeometry(Brushes.Red, new Pen(Brushes.Black, 0.05), streamGeometry);
+                 * */
+                dc.Pop();
+                dc.DrawImage(new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/img/Scrat.png")), new Rect(0, 0, 1, 1));
+                dc.Close();
             }
-            //streamGeometry.Freeze();
-            dc.DrawGeometry(Brushes.Red, new Pen(Brushes.Black, 0.05), streamGeometry);
-            dc.Pop();
-            
-            
-
-            dc.Close();
             return dv;
         }
 
@@ -74,11 +72,5 @@ namespace Studienarbeit
             SprayerEigWindow sprayerEigWindow = new SprayerEigWindow();
             sprayerEigWindow.ShowDialog();
         }
-        
     }
-
-    
-
-
-
 }

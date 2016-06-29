@@ -22,11 +22,20 @@ namespace Studienarbeit
     {
         // Anzeigegröße des Painters, quasi static
         public Size size = new Size(50,50);
-        // Malgröße
-        public Size dcSize;
 
         private Point position;
+
+        // Malpunktgröße
+        public Size dcSize;
+
+        public String name;
+        public override string ToString()
+        {
+            return name;
+        }
+
         // bool Active;
+
         private IPaint paintType;
         public IPaint PaintType
         {
@@ -46,23 +55,14 @@ namespace Studienarbeit
             InitializeComponent();
             this.Height = size.Height;
             this.Width = size.Width;
+
             WalkType = walk;
             PaintType = paint;
             VisualBrush WalkBrush = new VisualBrush(WalkType.GetFace(size));
             VisualBrush DrawBrush = new VisualBrush(PaintType.GetFace(size));
 
             walker.Fill = WalkBrush;
-            drawer.Fill = DrawBrush;
-
-            //AddVisualChild(PaintType.GetFace(new Size(20,20)));
-            //AddVisualChild(WalkType.GetFace(new Size(20,20)));
-            this.Loaded += Window_Loaded;
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //this.Height = MinVal;
-            //this.Width = MaxVal;
+            drawer.Fill = DrawBrush;           
         }
 
         public Point AdvancePosition()
@@ -86,14 +86,12 @@ namespace Studienarbeit
             else 
             {
                 PaintType.PaintOn(dc, size);
-            }
-            
+            } 
         }
 
         public void Reflect(ReflectionType reflType)
         {
             WalkType.Reflect(reflType);
         }
-        
     }
 }
