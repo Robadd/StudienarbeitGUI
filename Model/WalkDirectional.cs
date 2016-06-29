@@ -30,12 +30,12 @@ namespace Studienarbeit
             DX = dx;
         }
 
-        public Point PositionChange() 
+        public Point PositionChange()
         {
-            return new Point(DX,DY);
+            return new Point(DX, DY);
         }
 
-        public void Reflect(ReflectionType reflType) 
+        public void Reflect(ReflectionType reflType)
         {
             if (reflType == ReflectionType.Bottom || reflType == ReflectionType.Top) DY = -DY;
             else if (reflType == ReflectionType.Left || reflType == ReflectionType.Right) DX = -DX;
@@ -43,30 +43,30 @@ namespace Studienarbeit
 
         public IBehaviour Clone()
         {
-            return new WalkDirectional(DX,DY);
+            return new WalkDirectional(DX, DY);
         }
 
         public Visual GetFace(Size size)
         {
-            // Code einfügen
             DrawingVisual dv = new DrawingVisual();
             DrawingContext dc = dv.RenderOpen();
 
-            //dc.PushTransform(new ScaleTransform(size.Width, size.Height));
-            // HIER MALEN !!!! auf dc
-            dc.DrawLine(new Pen(Brushes.CornflowerBlue,2),new Point(0,size.Height),new Point(0.1 * size.Width,0.9*size.Height));
-
-
-            //dc.Pop();
+            dc.DrawLine(new Pen(Brushes.CornflowerBlue, 2), new Point(0, size.Height), new Point(0.1 * size.Width, 0.9 * size.Height));
             dc.Close();
+
             return dv;
         }
 
         public void ShowPropsDialog()
         {
-            // !!!ToDO Eingestellte Werte übernehmen
             QuerEigWindow querEigWindow = new QuerEigWindow();
-            querEigWindow.ShowDialog();
+            querEigWindow.XVersatz = DX;
+            querEigWindow.YVersatz = DY;
+            if (querEigWindow.ShowDialog() == true)
+            {
+                DX = querEigWindow.XVersatz;
+                DY = querEigWindow.YVersatz;
+            }
         }
     }
 }

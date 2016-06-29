@@ -10,9 +10,9 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Datei">
-                <MenuItem Header="Neu" />
-                <MenuItem Header="Bild Speichern" />
-                <MenuItem Header="Beenden" />
+                <MenuItem Header="Neu" Click="MenuItem_Click_Neu" />
+                <MenuItem Header="Bild Speichern" Click="MenuItem_Click_Save"/>
+                <MenuItem Header="Beenden" Click="MenuItem_Click_Beenden" />
             </MenuItem>
         </Menu>
         <!-- /Menü -->
@@ -30,22 +30,31 @@
             </Grid.ColumnDefinitions>
 
             <Label  Content="Maler:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Height="26" Width="42"/>
-            <ListView x:Name="Maler" Margin="10,0,5,5" Grid.Row="1">
+            <ListView x:Name="Maler" Margin="10,0,5,5" Grid.Row="1" SelectionChanged="Maler_SelectionChanged">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Aktiv" Width="40" DisplayMemberBinding="{Binding Aktiv}" />
-                        <GridViewColumn Header="Name" Width="50" DisplayMemberBinding="{Binding Name}" />
+                        <GridView.Columns>
+                            <GridViewColumn Header="Aktiv">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding Path=Aktiv, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Name" Width="100"  DisplayMemberBinding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" />
+                            <GridViewColumn Header="" Width="0" DisplayMemberBinding="{Binding Path=MyPainter}" />
+                        </GridView.Columns>
                     </GridView>
                 </ListView.View>
             </ListView>
 
 
             <Label  Content="Malart:" Grid.Column="1" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="26" Width="47" RenderTransformOrigin="0.128,0.385"/>
-            <ListBox x:Name="Malarten" Grid.Column="1" Margin="5,0,5,32" Grid.Row="1"/>
+            <ListBox x:Name="Malarten" Grid.Column="1" Margin="5,0,5,32" Grid.Row="1" SelectionChanged="Malarten_SelectionChanged"/>
             <Button x:Name="MalEig" Content="Eigenschaften" Grid.Column="1" Height="22" Margin="5,0,5,5" Grid.Row="1" VerticalAlignment="Bottom" Grid.RowSpan="1" Click="MalEig_Click"/>
 
             <Label  Content="Bewegungsart:" Grid.Column="2" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="26" Width="88"/>
-            <ListBox x:Name="BewArten" Grid.Column="2" Margin="5,0,5,32" Grid.Row="1"/>
+            <ListBox x:Name="BewArten" Grid.Column="2" Margin="5,0,5,32" Grid.Row="1" SelectionChanged="BewArten_SelectionChanged"/>
             <Button x:Name="BewEig" Content="Eigenschaften" Grid.Column="2" Height="22" Margin="6,0,5,5" Grid.Row="1" VerticalAlignment="Bottom" Grid.RowSpan="1" Click="BewEig_Click"/>
 
             <Label  Content="Name:" Grid.Column="3" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="26" Width="44"/>
@@ -55,14 +64,14 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox x:Name="Name" Height="23" Margin="5,0,10,0" TextWrapping="Wrap" Text="NeuerMaler" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="Name" Height="23" Margin="5,0,10,0" TextWrapping="Wrap" Text="NeuerMaler" VerticalAlignment="Top" Grid.ColumnSpan="2" TextChanged="Name_TextChanged"/>
 
                 <Label Content="X:" HorizontalAlignment="Left" Margin="0,28,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="XPos" Height="23" Margin="20,30,10,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+                <TextBox x:Name="XPos" Height="23" Margin="20,30,10,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" TextChanged="XPos_TextChanged_1"/>
 
 
                 <Label Content="Y:" Grid.Column="1" HorizontalAlignment="Left" Margin="0,28,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="YPos" Grid.Column="1" Height="23" Margin="20,30,10,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+                <TextBox x:Name="YPos" Grid.Column="1" Height="23" Margin="20,30,10,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" TextChanged="YPos_TextChanged_1"/>
 
                 <Button x:Name="NeuerMaler" Grid.ColumnSpan="2" Content="Neuer Maler" Margin="5,0,10,5" Height="22" VerticalAlignment="Bottom" Click="NeuerMaler_Click"/>
 

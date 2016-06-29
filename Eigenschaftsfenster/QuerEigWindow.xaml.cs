@@ -24,13 +24,27 @@ namespace Studienarbeit
             InitializeComponent();
         }
 
+        public int YVersatz
+        {
+            get { return YVers.ActualValue; }
+            set { YVers.ActualValue = value; }
+        }
+
+        public int XVersatz
+        {
+            get { return XVers.ActualValue; }
+            set { XVers.ActualValue = value; }
+        }
+
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = true;
             this.Close();
         }
 
         private void Abbruch_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
             this.Close();
         }
     }

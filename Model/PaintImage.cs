@@ -26,9 +26,7 @@ namespace Studienarbeit
 
         public void PaintOn(DrawingContext dc, Size dcSize)
         {
-            // TODO!!! 
-            //dc.DrawImage((ImageSource)image, new Rect(dcSize));
-
+            dc.DrawImage(image.Source, new Rect(dcSize));
         }
 
         public IBehaviour Clone()
@@ -36,15 +34,13 @@ namespace Studienarbeit
             return new PaintImage(Image);
         }
 
-
         public Visual GetFace(Size size)
         {
-            // Code einfügen
-            DrawingVisual dv = new DrawingVisual();       
+            DrawingVisual dv = new DrawingVisual();
             DrawingContext dc = dv.RenderOpen();
 
-           
-            // HIER MALEN !!!! auf dc
+            dc.DrawImage(image.Source, new Rect(0, 0, 0.5 * size.Width, 0.5 * size.Height));
+            dc.DrawRectangle(null, new Pen(Brushes.Gray, 0.1), new Rect(0, 0, 0.5 * size.Width, 0.5 * size.Height));
 
             dc.Close();
             return dv;
@@ -52,9 +48,12 @@ namespace Studienarbeit
 
         public void ShowPropsDialog()
         {
-            // !!!ToDO Eingestellte Werte übernehmen
+            
             ImageEigWindow imageEigWindow = new ImageEigWindow();
-            imageEigWindow.ShowDialog();
+            if (imageEigWindow.ShowDialog() == true)
+            {
+                Image = imageEigWindow.Image;
+            }
         }
     }
 }

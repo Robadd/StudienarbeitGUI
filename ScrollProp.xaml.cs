@@ -1,23 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Studienarbeit
 {
     /// <summary>
     /// Interaktionslogik für ScrollProp.xaml
+    /// 
+    /// Eigenschaften für ScrollProp:
+    /// ActualValue, MaxVal, MinVal. Alle selbsterklärend
     /// </summary>
     public partial class ScrollProp : UserControl
     {
@@ -36,46 +26,60 @@ namespace Studienarbeit
         }
 
         private int actualValue;
-        public int ActualValue 
-        { 
-            get 
+        public int ActualValue
+        {
+            get
             {
                 return actualValue;
-            } 
-            set 
+            }
+            set
             {
-                if (value > MaxVal) 
-                    actualValue = MaxVal;
-                else if (value < MinVal) 
-                    actualValue = MinVal;
-                else 
-                    actualValue = value;
-            } 
-        }
+                if (actualValue != value)
+                {
+                    int newVal;
+                    if (value > MaxVal) newVal = MaxVal;
+                    else if (value < MinVal) newVal = MinVal;
+                    else newVal = value;
 
+                    actualValue = newVal;
+                    TextVal.Text = newVal.ToString();
+                    Scroll.Value = -(double)newVal;
+                }
+            }
+        }
 
         public ScrollProp()
         {
             InitializeComponent();
+            this.Loaded += Window_Loaded;
         }
 
-        private void ScrollBar_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Scroll.Minimum = -(int)MaxVal;
+            Scroll.Maximum = -(int)MinVal;
+            //Scroll.Value = -ActualValue;
+            //TextVal.Text = ActualValue.ToString();
+        }
+
+        private void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (Scroll.Value != ActualValue)
             {
-                ActualValue = (int)Scroll.Value;
-                TextVal.Text = ActualValue.ToString();
+                ActualValue = -(int)Scroll.Value;
+                //TextVal.Text = ((int)Math.Round(-Scroll.Value)).ToString();
             }
         }
 
-        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (TextVal.Text != ActualValue.ToString())
             {
                 int newVal;
-                int.TryParse(TextVal.Text, out newVal);
-                Scroll.Value = newVal;
-                actualValue = newVal;
+                if (int.TryParse(TextVal.Text, out newVal))
+                {
+                    ActualValue = newVal;
+                }
             }
         }
     }

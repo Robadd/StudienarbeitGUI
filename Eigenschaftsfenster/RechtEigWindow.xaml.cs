@@ -24,6 +24,39 @@ namespace Studienarbeit
             InitializeComponent();
         }
 
+        public int LeftLimit
+        {
+            get { return Left.ActualValue; }
+            set { Left.ActualValue = value; }
+        }
+        public int RightLimit
+        {
+            get { return Right.ActualValue; }
+            set { Right.ActualValue = value; }
+        }
+        public int UpLimit
+        {
+            get { return Up.ActualValue; }
+            set { Up.ActualValue = value; }
+        }
+        public int DownLimit
+        {
+            get { return Down.ActualValue; }
+            set { Down.ActualValue = value; }
+        }
+
+        public int Versatz
+        {
+            get { return Vers.ActualValue; }
+            set { Vers.ActualValue = value; }
+        }
+
+        public string Startrichtung
+        {
+            get { return StartRich.SelectedItem.ToString(); }
+            set { StartRich.SelectedItem = value; }
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //StartRich Combobox Initialisierung
@@ -33,17 +66,20 @@ namespace Studienarbeit
             StartRich.Items.Add("Hinauf");
 
             StartRich.SelectedIndex = 0;
-            //ENDE StartRich Combobox Initialisierung
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = true;
             this.Close();
         }
 
         private void Abbruch_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
             this.Close();
         }
+
+
     }
 }

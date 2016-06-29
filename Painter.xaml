@@ -5,11 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              x:Name="PainterCanvas"
              mc:Ignorable="d" 
-             
              d:DesignHeight="300" d:DesignWidth="300">
-    
-
-        <Rectangle x:Name="walker" ></Rectangle>
-        
-    
+    <Grid>
+        <Rectangle x:Name="walker"></Rectangle>
+        <Rectangle x:Name="drawer"></Rectangle>
+    </Grid>
 </UserControl>

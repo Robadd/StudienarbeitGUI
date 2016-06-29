@@ -24,14 +24,34 @@ namespace Studienarbeit
         {
             InitializeComponent();
         }
-       
+
+        public Color Col
+        {
+            get { return ((SolidColorBrush)color.Fill).Color; }
+            set { color.Fill = new SolidColorBrush(value); }
+        }
+
+        public int Breite
+        {
+            get { return WidthValue.ActualValue; }
+            set { WidthValue.ActualValue = value; }
+        }
+
+        public int Hoehe
+        {
+            get { return HeightValue.ActualValue; }
+            set { HeightValue.ActualValue = value; }
+        }
+
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = true;
             this.Close();
         }
 
         private void Abbruch_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
             this.Close();
         }
 
@@ -41,8 +61,7 @@ namespace Studienarbeit
             
             if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                System.Windows.Media.Color c = Color.FromRgb(colorDialog.Color.R, colorDialog.Color.G, colorDialog.Color.B);
-                color.Fill = new SolidColorBrush(c);
+                Col = Color.FromRgb(colorDialog.Color.R, colorDialog.Color.G, colorDialog.Color.B);
             }
         }
     }

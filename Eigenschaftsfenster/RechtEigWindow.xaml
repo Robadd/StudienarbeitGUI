@@ -6,41 +6,35 @@
         xmlns:local="clr-namespace:Studienarbeit"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Eigenschaften - Rechteck" Height="260" Width="355" WindowStyle="ToolWindow" Loaded="Window_Loaded">
-    <Grid>
-        <GroupBox  Header="Grenzen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="100" Width="240">
-            <Grid>
-                <Label  Content="rechts:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="Rechts" HorizontalAlignment="Left" Height="23" Margin="60,12,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="32"/>
-                <ScrollBar x:Name="RechtsBar" HorizontalAlignment="Left" Height="23" Margin="92,12,0,0" VerticalAlignment="Top"/>
-                <Label Content="links:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="Links" HorizontalAlignment="Left" Height="23" Margin="60,43,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="32"/>
-                <ScrollBar x:Name="LinksBar" HorizontalAlignment="Left" Height="23" Margin="92,43,0,0" VerticalAlignment="Top"/>
-
-                <Label  Content="oben:" HorizontalAlignment="Left" Margin="121,12,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="Oben" HorizontalAlignment="Left" Height="23" Margin="171,14,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="32"/>
-                <ScrollBar x:Name="ObenBar" HorizontalAlignment="Left" Height="23" Margin="203,14,0,0" VerticalAlignment="Top"/>
-
-                <Label Content="unten:" HorizontalAlignment="Left" Margin="121,43,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="Unten" HorizontalAlignment="Left" Height="23" Margin="171,45,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="32"/>
-                <ScrollBar x:Name="UntenBar" HorizontalAlignment="Left" Height="23" Margin="203,45,0,0" VerticalAlignment="Top"/>
+        SizeToContent="WidthAndHeight"
+        Title="Eigenschaften - Rechteck" Loaded="Window_Loaded">
+    <Grid Margin="5,5,5,5">
+        <GroupBox  Header="Grenzen" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+            <Grid Margin="0,0,0,0">
+                <Label  Content="_rechts:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                <local:ScrollProp x:Name="Right" MaxVal="10" MinVal="-10" HorizontalAlignment="Left" Margin="50,2,0,0" VerticalAlignment="Top" Height="23" Width="42"/>
+                <Label Content="_links:" HorizontalAlignment="Left" Margin="0,31,0,0" VerticalAlignment="Top"/>
+                <local:ScrollProp x:Name="Left" MaxVal="10" MinVal="-10" HorizontalAlignment="Left" Margin="50,33,0,0" VerticalAlignment="Top" Height="23" Width="42"/>
+                <Label  Content="_oben:" HorizontalAlignment="Left" Margin="97,2,0,0" VerticalAlignment="Top"/>
+                <local:ScrollProp x:Name="Up" MaxVal="10" MinVal="-10" HorizontalAlignment="Left" Margin="142,2,0,0" VerticalAlignment="Top" Height="23" Width="42"/>
+                <Label Content="_unten:" HorizontalAlignment="Left" Margin="97,31,0,0" VerticalAlignment="Top"/>
+                <local:ScrollProp x:Name="Down" MaxVal="10" MinVal="-10" HorizontalAlignment="Left" Margin="142,33,0,0" VerticalAlignment="Top" Height="23" Width="42"/>
             </Grid>
         </GroupBox>
 
-        <GroupBox Header="Bewegung" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Height="100" Width="240">
+        <GroupBox Header="Bewegung" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top">
             <Grid>
-                <Label Content="Versatz:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="Versatz" HorizontalAlignment="Left" Height="23" Margin="97,12,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="32" RenderTransformOrigin="0.438,0.435"/>
-                <ScrollBar x:Name="VersBar" HorizontalAlignment="Left" Height="23" Margin="129,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="11.824,2"/>
+                <Label Content="Versatz:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
 
-                <Label  Content="Startrichtung:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-
-                <ComboBox x:Name="StartRich" HorizontalAlignment="Left" Margin="97,45,0,0" VerticalAlignment="Top" Width="121"/>
+                <Label  Content="Startrichtung:" HorizontalAlignment="Left" Margin="0,31,0,0" VerticalAlignment="Top"/>
+                <local:ScrollProp x:Name="Vers" MinVal="-10" MaxVal="10" HorizontalAlignment="Left" Margin="56,2,0,0" VerticalAlignment="Top" Height="22" Width="35"/>
+                <ComboBox x:Name="StartRich" HorizontalAlignment="Left" Margin="87,35,0,0" VerticalAlignment="Top" Width="121"/>
+                
             </Grid>
         </GroupBox>
         
-        <Button x:Name="Ok" Content="Ok" HorizontalAlignment="Left" Margin="255,166,0,0" VerticalAlignment="Top" Width="74" Click="Ok_Click"/>
-        <Button x:Name="Abbruch" Content="Abbrechen" HorizontalAlignment="Left" Margin="255,193,0,0" VerticalAlignment="Top" Width="74" Click="Abbruch_Click"/>
+        <Button x:Name="Ok" Content="Ok" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Width="74" Click="Ok_Click"/>
+        <Button x:Name="Abbruch" Content="Abbrechen" HorizontalAlignment="Left" Margin="89,165,0,0" VerticalAlignment="Top" Width="74" Click="Abbruch_Click"/>
 
     </Grid>
 </Window>

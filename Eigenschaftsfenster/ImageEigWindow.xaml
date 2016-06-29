@@ -6,13 +6,15 @@
         xmlns:local="clr-namespace:Studienarbeit"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Eigenschaften - Bild" Height="175" Width="205" WindowStyle="ToolWindow">
-    <Grid>
-        <Label  Content="Bild:" HorizontalAlignment="Left" Height="26"  Width="32" Margin="5,10,0,0" VerticalAlignment="Top"/>
-        <Rectangle HorizontalAlignment="Left" Height="100" Margin="10,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Margin="10,36,0,0" Width="100" Height="99" VerticalAlignment="Top" />
-        <Button x:Name="Ok" Content="Ok" Margin="115,87,3,0" VerticalAlignment="Top" Click="Ok_Click"/>
-        <Button x:Name="Abbruch" Content="Abbrechen" Margin="115,114,3,0" Height="22" VerticalAlignment="Top" Click="Abbruch_Click"/>
+        SizeToContent="WidthAndHeight"
+        Title="Eigenschaften - Bild">
+    <Grid Margin="0,0,5,5">
+        <Label  Content="Bild:" HorizontalAlignment="Left" Height="26"  Width="32" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="100" Margin="5,25,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="Image" HorizontalAlignment="Left"  Margin="5,25,0,0"  Width="100" Height="99" VerticalAlignment="Top"/>
+        <Button x:Name="Ok" IsDefault="True" Content="Ok" Margin="110,102,0,0" VerticalAlignment="Top" Click="Ok_Click"/>
+        <Button x:Name="Abbruch" IsCancel="True" Content="Abbrechen" Margin="110,75,0,0" Height="22" VerticalAlignment="Top" Click="Abbruch_Click"/>
+        <Button x:Name="BildLaden" Content="Bild laden" HorizontalAlignment="Left" Height="22" Margin="110,48,0,0" VerticalAlignment="Top" Width="70" Click="BildLaden_Click"/>
 
     </Grid>
 </Window>
